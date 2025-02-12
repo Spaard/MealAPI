@@ -21,12 +21,13 @@ let HeaderElement = class HeaderElement extends LitElement {
             </div>
             <div>
                 <button @click=${this._onClick} part="button"></button>
-                <input type="text" placeholder="Search a dish">
+                <input type="text" placeholder="Search a dish :">
             </div>
         </div>
     `;
     }
     _onClick() {
+        console.log("Clicked");
     }
 };
 HeaderElement.styles = css `
@@ -38,19 +39,30 @@ HeaderElement.styles = css `
         margin : 0;
     }
     img {
-        width: 5em;
-        height: 5em;
+        width: 5vw;
+        aspect-ratio : 1 / 1;
     }
     h1 {
-        font-size : 4em;
+        font-size : 4vw;
         margin : 0;
     }
     button {
         background-image : url("https://tse4.mm.bing.net/th?id=OIP.0kufT9tRfo3w1Km6mVBOuwHaHa&pid=Api");
         background-size: contain;
         cursor : pointer;
-        width: 2em;
-        height: 2em;
+        width: 3vw;
+        aspect-ratio : 1 / 1;
+        padding : 1vh;
+    }
+    input {
+        width: 30vw;
+        height: 5vh;
+        font-size: 2vw;
+        margin : 1vw;
+    }
+    input::placeholder {
+        color : red;
+        opacity : 0.7;
     }
   `;
 HeaderElement = __decorate([
