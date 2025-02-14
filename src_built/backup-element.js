@@ -21,10 +21,23 @@ import { customElement, property } from 'lit/decorators.js';
 let MealElement = class MealElement extends LitElement {
     constructor() {
         super(...arguments);
+        /**
+         * The name to say "Hello" to.
+         */
+        this.name = 'World';
+        /**
+         * The number of times the button has been clicked.
+         */
         this.count = 0;
     }
     render() {
         return html `
+      <h1>${this.sayHello(this.name)}!</h1>
+      <button @click=${this._onClick} part="button">
+        Click Count: ${this.count}
+      </button>
+      <slot></slot>
+
       <div class="container"> 
         <img class="image-preview" src="../images/test.jpg">
         <div class="infos-preview">
@@ -35,18 +48,28 @@ let MealElement = class MealElement extends LitElement {
       </div>
     `;
     }
+    _onClick() {
+        this.count++;
+        this.dispatchEvent(new CustomEvent('count-changed'));
+    }
+    /**
+     * Formats a greeting
+     * @param name The name to say "Hello" to
+     */
+    sayHello(name) {
+        return `Hello, ${name}`;
+    }
 };
 MealElement.styles = css `
-    
+    /*
     :host {
       display: block;
-      border: solid 1px lightgray;
+      border: solid 1px gray;
       padding: 16px;
-      max-width: 70vw;
-      margin-left: 10vw;
-      margin-top: 16px;
+      max-width: 800px;
     } 
-    
+    */
+
     h1 {
       color:blue;
     }
@@ -86,10 +109,13 @@ MealElement.styles = css `
     }
   `;
 __decorate([
+    property()
+], MealElement.prototype, "name", void 0);
+__decorate([
     property({ type: Number })
 ], MealElement.prototype, "count", void 0);
 MealElement = __decorate([
     customElement('meal-element')
 ], MealElement);
 export { MealElement };
-//# sourceMappingURL=meal-element.js.map
+//# sourceMappingURL=backup-element.js.map
