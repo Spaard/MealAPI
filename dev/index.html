@@ -9,19 +9,28 @@
     <script type="module" src="../src_built/meal-element.js"></script>
     <script type="module" src="../src_built/cook-header.js"></script>
     <style>
-      p {
-        border: solid 1px blue;
-        padding: 8px;
-      }
       body {
         margin : 0;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+      cook-header {
+        flex : 0 0;
+      }
+      .meal_container {
+        flex : 1 1;
+        overflow-y: auto;
       }
     </style>
   </head>
   <body>
     <cook-header></cook-header>
-    <meal-element>
-      <p>We're cooked</p>
-    </meal-element>
+    <div class="meal_container">
+      <meal-element></meal-element>
+      <meal-element></meal-element>
+      <meal-element></meal-element>
+      <meal-element></meal-element>
+    </div>
   </body>
 </html>

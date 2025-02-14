@@ -16,7 +16,7 @@ let HeaderElement = class HeaderElement extends LitElement {
         return html `
         <div style="border : thick double black">
             <div>
-                <img src="https://tse1.mm.bing.net/th?id=OIP.HzgWWLsamjCtqW4YJFoVagHaHZ&pid=Api">
+                <img src="../images/logo.png">
                 <h1><span style="color:red">Let</span><span style="color:green">Me</span><span style="color:red">Cook</span>!</h1>
             </div>
             <div>
@@ -47,7 +47,7 @@ HeaderElement.styles = css `
         margin : 0;
     }
     button {
-        background-image : url("https://tse4.mm.bing.net/th?id=OIP.0kufT9tRfo3w1Km6mVBOuwHaHa&pid=Api");
+        background-image : url("../images/magnifier.png");
         background-size: contain;
         cursor : pointer;
         width: 3vw;

@@ -13,21 +13,8 @@ import { LitElement } from 'lit';
  */
 export declare class MealElement extends LitElement {
     static styles: import("lit").CSSResult;
-    /**
-     * The name to say "Hello" to.
-     */
-    name: string;
-    /**
-     * The number of times the button has been clicked.
-     */
     count: number;
     render(): import("lit-html").TemplateResult<1>;
-    private _onClick;
-    /**
-     * Formats a greeting
-     * @param name The name to say "Hello" to
-     */
-    sayHello(name: string): string;
 }
 declare global {
     interface HTMLElementTagNameMap {
