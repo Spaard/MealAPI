@@ -3,21 +3,34 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>&lt;my-element> Demo</title>
+    <title>LetMeCook!</title>
     <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
     <script src="../node_modules/lit/polyfill-support.js"></script>
     <script type="module" src="../src_built/meal-element.js"></script>
+    <script type="module" src="../src_built/cook-header.js"></script>
     <style>
-      p {
-        border: solid 1px blue;
-        padding: 8px;
+      body {
+        margin : 0;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+      cook-header {
+        flex : 0 0;
+      }
+      .meal_container {
+        flex : 1 1;
+        overflow-y: auto;
       }
     </style>
   </head>
   <body>
-    <meal-element></meal-element>
-    <meal-element></meal-element>
-    <meal-element></meal-element>
-    <meal-element></meal-element>
+    <cook-header></cook-header>
+    <div class="meal_container">
+      <meal-element></meal-element>
+      <meal-element></meal-element>
+      <meal-element></meal-element>
+      <meal-element></meal-element>
+    </div>
   </body>
 </html>
