@@ -7,17 +7,25 @@
 import {LitElement, html, css} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
 
-/**
- * An example element.
- *
- * @fires count-changed - Indicates when the count changes
- * @slot - This element has a slot
- * @csspart button - The button
- */
 @customElement('meal-element')
 export class MealElement extends LitElement {
+
+  @property({type : String})
+  idMeal = "Test Id";
+
+  @property({type : String})
+  name = "Name of the dish";
+
+  @property({type : String})
+  category = "Category of the dish";
+
+  @property({type : String})
+  instructions = "Lets cook the recipe..."
+
+  @property({type : String})
+  urlImage = "../images/test.jpg"
+
   static override styles = css`
-    
     :host {
       display: block;
       border: solid 1px lightgray;
@@ -66,22 +74,18 @@ export class MealElement extends LitElement {
     }
   `;
 
-  @property({type: Number})
-  count = 0;
-
   override render() {
     return html`
       <div class="container"> 
-        <img class="image-preview" src="../images/test.jpg">
+        <img class="image-preview" src=${this.urlImage}>
         <div class="infos-preview">
-          <span class="dish-name">Nom du plat</span>
+          <span class="dish-name">${this.name}</span>
           <span class="cook-time">Temps de cook</span>
           <span class="main-ingredients">Ingrédients principaux</span>
         </div>
       </div>
     `;
   }
-
 }
 
 declare global {
