@@ -17,16 +17,15 @@ import {customElement, property} from 'lit/decorators.js';
 @customElement('meal-element')
 export class MealElement extends LitElement {
   static override styles = css`
-    
+    /*
     :host {
       display: block;
-      border: solid 1px lightgray;
+      border: solid 1px gray;
       padding: 16px;
-      max-width: 70vw;
-      margin-left: 10vw;
-      margin-top: 16px;
+      max-width: 800px;
     } 
-    
+    */
+
     h1 {
       color:blue;
     }
@@ -66,11 +65,26 @@ export class MealElement extends LitElement {
     }
   `;
 
+  /**
+   * The name to say "Hello" to.
+   */
+  @property()
+  name = 'World';
+
+  /**
+   * The number of times the button has been clicked.
+   */
   @property({type: Number})
   count = 0;
 
   override render() {
     return html`
+      <h1>${this.sayHello(this.name)}!</h1>
+      <button @click=${this._onClick} part="button">
+        Click Count: ${this.count}
+      </button>
+      <slot></slot>
+
       <div class="container"> 
         <img class="image-preview" src="../images/test.jpg">
         <div class="infos-preview">
@@ -82,6 +96,18 @@ export class MealElement extends LitElement {
     `;
   }
 
+  private _onClick() {
+    this.count++;
+    this.dispatchEvent(new CustomEvent('count-changed'));
+  }
+
+  /**
+   * Formats a greeting
+   * @param name The name to say "Hello" to
+   */
+  sayHello(name: string): string {
+    return `Hello, ${name}`;
+  }
 }
 
 declare global {
