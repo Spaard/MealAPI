@@ -17,7 +17,7 @@ type Dish = {
   urlImage : string;
 }
 
-const dishes : Dish[] = [
+/**const dishes : Dish[] = [
     {
         idMeal : "52771",
         name : "Spicy Arrabiata Penne",
@@ -61,7 +61,7 @@ const dishes : Dish[] = [
         instructions : "Bring a large pot of water to a boil. Add kosher salt to the boiling water, then add the pasta. Cook according to the package instructions, about 9 minutes.\r\nIn a large skillet over medium-high heat, add the olive oil and heat until the oil starts to shimmer. Add the garlic and cook, stirring, until fragrant, 1 to 2 minutes. Add the chopped tomatoes, red chile flakes, Italian seasoning and salt and pepper to taste. Bring to a boil and cook for 5 minutes. Remove from the heat and add the chopped basil.\r\nDrain the pasta and add it to the sauce. Garnish with Parmigiano-Reggiano flakes and more basil and serve warm.",
         urlImage : "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"
     }
-]
+]*/
 
 @customElement('meal-list')
 export class MealListElement extends LitElement {
@@ -70,12 +70,19 @@ export class MealListElement extends LitElement {
 
   _dishDataMining = new Task(this, {
     args: () => ["test"],
-    task: () => {
-      return new Promise<Dish[]>((resolve) => {
-        setTimeout( () => {
-            resolve(dishes);
-        }, 2000);
-      })
+    task: async () => {
+      const response = await fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=");
+      if (!response.ok) {
+        throw new Error("Server response error");
+      }
+      const data = await response.json();
+      return data.meals.map((meal : any) : Dish=> ({
+        idMeal: meal.idMeal,
+        name: meal.strMeal,
+        category: meal.strCategory,
+        instructions: meal.strInstructions,
+        urlImage: meal.strMealThumb
+      }));
     }
   });
 
@@ -96,7 +103,7 @@ export class MealListElement extends LitElement {
     return html`${this._dishDataMining.render({
       initial : () => html`<p>Waiting to start task</p>`,
       pending : () => html`<p>Running task...</p>`,
-      complete : (dishes) => html`${dishes.map(dish => html`
+      complete : (dishes : Dish[]) => html`${dishes.map((dish : Dish) => html`
         <meal-element
             idMeal = ${dish.idMeal}
             name = ${dish.name}
