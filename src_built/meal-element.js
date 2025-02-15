@@ -19,6 +19,7 @@ let MealElement = class MealElement extends LitElement {
         this.category = "Category of the dish";
         this.instructions = "Lets cook the recipe...";
         this.urlImage = "../images/test.jpg";
+        this.mainIngredients = ["Test ingr1", "Test ingr2", "Test ingr3"];
     }
     render() {
         return html `
@@ -26,8 +27,13 @@ let MealElement = class MealElement extends LitElement {
         <img class="image-preview" src=${this.urlImage}>
         <div class="infos-preview">
           <span class="dish-name">${this.name}</span>
-          <span class="cook-time">Temps de cook</span>
-          <span class="main-ingredients">Ingrédients principaux</span>
+          <span class="cook-time">Temps de cook : 40min</span>
+          <span class="main-ingredients">Main ingredients :</span>
+          <ul style="margin : 0">
+            <li>${this.mainIngredients[0]}</li>
+            <li>${this.mainIngredients[1]}</li>
+            <li>${this.mainIngredients[2]}</li>
+          </ul>
         </div>
       </div>
     `;
@@ -48,9 +54,9 @@ MealElement.styles = css `
     }
 
     .image-preview {
+      height: 15vw;
+      aspect-ratio : 1 / 1;
       box-sizing: border-box;
-      width: 15vw;
-      max-width:300px;
     }
 
     .infos-preview{
@@ -64,6 +70,7 @@ MealElement.styles = css `
       box-sizing: border-box;
       display: flex;
       flex-direction: row;
+      align-items: center;
       gap: 10px;
     }
 
@@ -96,6 +103,9 @@ __decorate([
 __decorate([
     property({ type: String })
 ], MealElement.prototype, "urlImage", void 0);
+__decorate([
+    property({ type: Array })
+], MealElement.prototype, "mainIngredients", void 0);
 MealElement = __decorate([
     customElement('meal-element')
 ], MealElement);

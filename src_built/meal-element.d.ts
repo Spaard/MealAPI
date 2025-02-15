@@ -10,6 +10,7 @@ export declare class MealElement extends LitElement {
     category: string;
     instructions: string;
     urlImage: string;
+    mainIngredients: string[];
     static styles: import("lit").CSSResult;
     render(): import("lit-html").TemplateResult<1>;
 }

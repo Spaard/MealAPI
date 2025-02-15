@@ -21,6 +21,7 @@ export declare class MealListElement extends LitElement {
         </div>
       `;
     }*/
+    /**mainIngredients = ${dish.mainIngredients}*/
     render(): import("lit-html").TemplateResult<1>;
 }
 declare global {

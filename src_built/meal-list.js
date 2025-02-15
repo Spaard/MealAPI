@@ -24,13 +24,26 @@ let MealListElement = class MealListElement extends LitElement {
                     throw new Error("Server response error");
                 }
                 const data = await response.json();
-                return data.meals.map((meal) => ({
+                /**return data.meals.map((meal : any) : Dish => ({
+                  idMeal: meal.idMeal,
+                  name: meal.strMeal,
+                  category: meal.strCategory,
+                  instructions: meal.strInstructions,
+                  urlImage: meal.strMealThumb,
+                  mainIngredients : [meal.strIngredient1, meal.strIngredient2, meal.strIngredient3]
+                }));*/
+                const data2 = data.meals.map((meal) => ({
                     idMeal: meal.idMeal,
                     name: meal.strMeal,
                     category: meal.strCategory,
                     instructions: meal.strInstructions,
-                    urlImage: meal.strMealThumb
+                    urlImage: meal.strMealThumb,
+                    mainIngredients: [meal.strIngredient1, meal.strIngredient2, meal.strIngredient3]
                 }));
+                console.log(data2);
+                console.log(data2[1].mainIngredients);
+                console.log(Array.isArray(data2[1].mainIngredients));
+                return data2;
             }
         });
     }
@@ -46,6 +59,7 @@ let MealListElement = class MealListElement extends LitElement {
         </div>
       `;
     }*/
+    /**mainIngredients = ${dish.mainIngredients}*/
     render() {
         return html `${this._dishDataMining.render({
             initial: () => html `<p>Waiting to start task</p>`,
@@ -57,6 +71,7 @@ let MealListElement = class MealListElement extends LitElement {
             category = ${dish.category}
             instructions = ${dish.instructions}
             urlImage = ${dish.urlImage}
+            .mainIngredients = ${dish.mainIngredients}
             ></meal-element>
         `)}`
         })}`;
