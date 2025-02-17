@@ -11,14 +11,14 @@ import { LitElement } from 'lit';
  * @slot - This element has a slot
  * @csspart button - The button
  */
-export declare class MealElement extends LitElement {
+export declare class MealPage extends LitElement {
     static styles: import("lit").CSSResult;
     count: number;
     render(): import("lit-html").TemplateResult<1>;
 }
 declare global {
     interface HTMLElementTagNameMap {
-        'meal-element': MealElement;
+        'meal-page': MealPage;
     }
 }
-//# sourceMappingURL=meal-element%20copy.d.ts.map
+//# sourceMappingURL=meal-page.d.ts.map

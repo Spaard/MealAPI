@@ -18,7 +18,7 @@ import { customElement, property } from 'lit/decorators.js';
  * @slot - This element has a slot
  * @csspart button - The button
  */
-let MealElement = class MealElement extends LitElement {
+let MealPage = class MealPage extends LitElement {
     constructor() {
         super(...arguments);
         this.count = 0;
@@ -26,53 +26,64 @@ let MealElement = class MealElement extends LitElement {
     render() {
         return html `
       <div class="container"> 
-        <img class="image-preview" src="../images/test.jpg">
-        <div class="infos-preview">
-          <span class="dish-name">Nom du plat</span>
-          <span class="cook-time">Temps de cook</span>
-          <span class="main-ingredients">Ingrédients principaux</span>
+        <span class="dish-name">Nom du plat</span>
+        <div class="infos-container">
+          <div class="dish-tags">Tags</div>
+          <span class="cook-time">- Temps de cook</span>
         </div>
+        <hr class="dotted">
+        <img class="image" src="../images/test.jpg">
+        <span class="ingredients">Ingrédients :</span>
+        <div class="ingredients"></div>
+        <hr class="dotted">
+        <span class="preparation">Préparation :</span>
+        <div class="preparation"></div>
       </div>
     `;
     }
 };
-MealElement.styles = css `
+MealPage.styles = css `
     
     :host {
       display: block;
-      border: solid 1px lightgray;
+      border: solid 1px blue;
       padding: 16px;
       max-width: 70vw;
       margin-left: 10vw;
       margin-top: 16px;
     } 
     
-    h1 {
-      color:blue;
-    }
-
-    .image-preview {
-      box-sizing: border-box;
-      width: 15vw;
-      max-width:300px;
-    }
-
-    .infos-preview{
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      //gap: 10%;
-    }
-
     .container{
       box-sizing: border-box;
       display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 3vh;
+    }
+
+    .infos-container {
+      box-sizing: border-box;
+      display: flex;
       flex-direction: row;
-      gap: 10px;
+      gap: 5px;
+    }
+
+    hr.dotted {
+      border-top: 3px dotted #bbb;
+      width: 100%; 
+    }
+
+    .image {
+      height: 50vh;
+      width: auto;
+      max-width: 100%;
+      display: block;
+      object-fit: cover;
+      margin: 0;
     }
 
     .dish-name {
-      font-size: 1.5rem;
+      font-size: 2rem;
       font-weight: bold;
     }
 
@@ -80,16 +91,15 @@ MealElement.styles = css `
       color: gray;
     }
 
-    .main-ingredients{
-      color: gray;
-      padding-top: 5vw;
+    .ingredients{
+      color: "#272727";
     }
   `;
 __decorate([
     property({ type: Number })
-], MealElement.prototype, "count", void 0);
-MealElement = __decorate([
-    customElement('meal-element')
-], MealElement);
-export { MealElement };
-//# sourceMappingURL=meal-element%20copy.js.map
+], MealPage.prototype, "count", void 0);
+MealPage = __decorate([
+    customElement('meal-page')
+], MealPage);
+export { MealPage };
+//# sourceMappingURL=meal-page.js.map
