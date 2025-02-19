@@ -1,0 +1,1 @@
+{"version":3,"file":"meal-page.d.ts","sourceRoot":"","sources":["../src/meal-page.ts"],"names":[],"mappings":"AAAA;;;;GAIG;AAEH,OAAO,EAAC,UAAU,EAAY,MAAM,KAAK,CAAC;AAG1C;;;;;;GAMG;AACH,qBACa,QAAS,SAAQ,UAAU;IACtC,OAAgB,MAAM,0BAoDpB;IAGF,KAAK,SAAK;IAED,MAAM;CAmBhB;AAED,OAAO,CAAC,MAAM,CAAC;IACb,UAAU,qBAAqB;QAC7B,WAAW,EAAE,QAAQ,CAAC;KACvB;CACF"}
