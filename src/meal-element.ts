@@ -7,17 +7,28 @@
 import {LitElement, html, css} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
 
-/**
- * An example element.
- *
- * @fires count-changed - Indicates when the count changes
- * @slot - This element has a slot
- * @csspart button - The button
- */
 @customElement('meal-element')
 export class MealElement extends LitElement {
+
+  @property({type : String})
+  idMeal = "Test Id";
+
+  @property({type : String})
+  name = "Name of the dish";
+
+  @property({type : String})
+  category = "Category of the dish";
+
+  @property({type : String})
+  instructions = "Lets cook the recipe..."
+
+  @property({type : String})
+  urlImage = "../images/test.jpg"
+
+  @property({type : Array})
+  mainIngredients : string[] = ["Test ingr1", "Test ingr2", "Test ingr3"]
+
   static override styles = css`
-    
     :host {
       display: block;
       border: solid 1px lightgray;
@@ -32,9 +43,9 @@ export class MealElement extends LitElement {
     }
 
     .image-preview {
+      height: 15vw;
+      aspect-ratio : 1 / 1;
       box-sizing: border-box;
-      width: 15vw;
-      max-width:300px;
     }
 
     .infos-preview{
@@ -48,6 +59,7 @@ export class MealElement extends LitElement {
       box-sizing: border-box;
       display: flex;
       flex-direction: row;
+      align-items: center;
       gap: 10px;
     }
 
@@ -66,22 +78,23 @@ export class MealElement extends LitElement {
     }
   `;
 
-  @property({type: Number})
-  count = 0;
-
   override render() {
     return html`
       <div class="container"> 
-        <img class="image-preview" src="../images/test.jpg">
+        <img class="image-preview" src=${this.urlImage}>
         <div class="infos-preview">
-          <span class="dish-name">Nom du plat</span>
-          <span class="cook-time">Temps de cook</span>
-          <span class="main-ingredients">Ingrédients principaux</span>
+          <span class="dish-name">${this.name}</span>
+          <span class="cook-time">Temps de cook : 40min</span>
+          <span class="main-ingredients">Main ingredients :</span>
+          <ul style="margin : 0">
+            <li>${this.mainIngredients[0]}</li>
+            <li>${this.mainIngredients[1]}</li>
+            <li>${this.mainIngredients[2]}</li>
+          </ul>
         </div>
       </div>
     `;
   }
-
 }
 
 declare global {
