@@ -13,6 +13,7 @@ export declare class MealElement extends LitElement {
     mainIngredients: string[];
     static styles: import("lit").CSSResult;
     render(): import("lit-html").TemplateResult<1>;
+    handleClick(): void;
 }
 declare global {
     interface HTMLElementTagNameMap {

@@ -48,7 +48,7 @@ export class HeaderElement extends LitElement {
   override render() {
     return html`
         <div style="border : thick double black">
-            <div>
+            <div @click="${this.handleClick}" style="cursor:pointer;">
                 <img src="../images/logo.png">
                 <h1><span style="color:red">Let</span><span style="color:green">Me</span><span style="color:red">Cook</span>!</h1>
             </div>
@@ -62,6 +62,10 @@ export class HeaderElement extends LitElement {
 
   private _onClick() {
     console.log("Clicked");
+  }
+
+  handleClick() {
+    window.location.href = `index.html`;
   }
 
 }

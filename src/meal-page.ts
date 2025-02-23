@@ -32,7 +32,7 @@ export class MealPage extends LitElement {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 3vh;
+      gap: 1vh;
     }
 
     .infos-container {
@@ -61,7 +61,7 @@ export class MealPage extends LitElement {
       font-weight: bold;
     }
 
-    .cook-time {
+    .meal-category{
       color: gray;
     }
 
@@ -70,24 +70,89 @@ export class MealPage extends LitElement {
     }
   `;
 
-  @property({type: Number})
-  count = 0;
+  @property({type: String})
+  mealId = '';
+
+  @property({type: String})
+  name = 'Nom du plat';
+
+  @property({type: String})
+  category = 'category';
+
+  @property({type: String})
+  imageUrl = '../images/test.jpg';
+
+  @property({type: Array})
+  ingredients: string[] = [];
+
+  @property({type: String})
+  instructions = '';
+
+  @property({type: String})
+  area = '';
+
+  override async firstUpdated() {
+    // Récupération de l'id du plat à partir de l'URL
+    const params = new URLSearchParams(window.location.search);
+    this.mealId = params.get('mealId') || '';
+    console.log(this.mealId);
+  
+    if (this.mealId) {
+      try {
+        const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${this.mealId}`);
+        if (response.ok) {
+          let data = await response.json();
+          data = data.meals[0];
+          console.log(data);
+          
+          this.name = data.strMeal;
+          this.imageUrl = data.strMealThumb;
+          this.category = data.strCategory;
+          this.area = data.strArea;
+          this.instructions = data.strInstructions;
+
+          this.ingredients = [];
+          for (let i = 1; i <= 20; i++) {
+            const ingredient = data[`strIngredient${i}`];
+            if (ingredient && ingredient.trim() !== '') {
+              this.ingredients.push(ingredient);
+            }
+          }
+
+          
+        } else {
+          console.error('Erreur lors de la récupération du plat:', response.status);
+        }
+      } catch (error) {
+        console.error('Erreur réseau :', error);
+      }
+    }
+  }
 
   override render() {
     return html`
       <div class="container"> 
-        <span class="dish-name">Nom du plat</span>
+        <span class="dish-name">${this.name}</span>
         <div class="infos-container">
-          <div class="dish-tags">Tags</div>
-          <span class="cook-time">- Temps de cook</span>
+          <div class="dish-tags">Category : ${this.category}</div>
+          <span class="meal-category"></span>
+        </div>
+        <div class="infos-container">
+          <div class="dish-tags">Area : ${this.area}</div>
+          <span class="meal-category"></span>
         </div>
         <hr class="dotted">
-        <img class="image" src="../images/test.jpg">
+        <img class="image" src="${this.imageUrl}" alt="Image du plat">
         <span class="ingredients">Ingrédients :</span>
-        <div class="ingredients"></div>
+        <ul class="ingredients">
+          ${this.ingredients.length > 0 
+            ? this.ingredients.map(item => html`<li>${item}</li>`)
+            : html`<li>Aucun ingrédient disponible</li>`
+          }
+        </ul>
         <hr class="dotted">
         <span class="preparation">Préparation :</span>
-        <div class="preparation"></div>
+        <div class="preparation">${this.instructions}</div>
       </div>
     `;
   }
