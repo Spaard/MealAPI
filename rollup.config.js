@@ -9,6 +9,7 @@ import terser from '@rollup/plugin-terser';
 import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 
+
 export default {
   input: 'my-element.js',
   output: {

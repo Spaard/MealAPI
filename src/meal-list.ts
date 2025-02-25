@@ -10,25 +10,26 @@ import {Task} from '@lit/task';
 import './meal-element';
 
 type Dish = {
-  idMeal : string;
-  name : string;
-  category : string;
-  instructions : string;
-  urlImage : string;
-  mainIngredients : string[];
-}
+  idMeal: string;
+  name: string;
+  category: string;
+  instructions: string;
+  urlImage: string;
+  mainIngredients: string[];
+};
 
 @customElement('meal-list')
 export class MealListElement extends LitElement {
-  static override styles = css`
-  `;
+  static override styles = css``;
 
   _dishDataMining = new Task(this, {
-    args: () => ["test"],
+    args: () => ['test'],
     task: async () => {
-      const response = await fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=");
+      const response = await fetch(
+        'https://www.themealdb.com/api/json/v1/1/search.php?s='
+      );
       if (!response.ok) {
-        throw new Error("Server response error");
+        throw new Error('Server response error');
       }
       const data = await response.json();
       /**return data.meals.map((meal : any) : Dish => ({
@@ -39,17 +40,26 @@ export class MealListElement extends LitElement {
         urlImage: meal.strMealThumb,
         mainIngredients : [meal.strIngredient1, meal.strIngredient2, meal.strIngredient3]
       }));*/
-      const data2 = data.meals.map((meal : any) : Dish => ({
-        idMeal: meal.idMeal,
-        name: meal.strMeal,
-        category: meal.strCategory,
-        instructions: meal.strInstructions,
-        urlImage: meal.strMeal === "Migas" ? "https://tse3.mm.bing.net/th?id=OIP.QNc-r97rLf2qAfX9jT2g4wHaE0&pid=Api" : meal.strMealThumb,
-        mainIngredients : [meal.strIngredient1, meal.strIngredient2, meal.strIngredient3]
-      }));
+      const data2 = data.meals.map(
+        (meal: any): Dish => ({
+          idMeal: meal.idMeal,
+          name: meal.strMeal,
+          category: meal.strCategory,
+          instructions: meal.strInstructions,
+          urlImage:
+            meal.strMeal === 'Migas'
+              ? 'https://tse3.mm.bing.net/th?id=OIP.QNc-r97rLf2qAfX9jT2g4wHaE0&pid=Api'
+              : meal.strMealThumb,
+          mainIngredients: [
+            meal.strIngredient1,
+            meal.strIngredient2,
+            meal.strIngredient3,
+          ],
+        })
+      );
       console.log(data2);
       return data2;
-    }
+    },
   });
 
   /**override render() {
@@ -66,22 +76,24 @@ export class MealListElement extends LitElement {
   }*/
 
   /**mainIngredients = ${dish.mainIngredients}*/
-  override render(){
+  override render() {
     return html`${this._dishDataMining.render({
-      initial : () => html`<p>Waiting to start task</p>`,
-      pending : () => html`<p>Running task...</p>`,
-      complete : (dishes : Dish[]) => html`${dishes.map((dish : Dish) => html`
-        <meal-element
-            idMeal = ${dish.idMeal}
-            name = ${dish.name}
-            category = ${dish.category}
-            instructions = ${dish.instructions}
-            urlImage = ${dish.urlImage}
-            .mainIngredients = ${dish.mainIngredients}
+      initial: () => html`<p>Waiting to start task</p>`,
+      pending: () => html`<p>Running task...</p>`,
+      complete: (dishes: Dish[]) =>
+        html`${dishes.map(
+          (dish: Dish) => html`
+            <meal-element
+              idMeal=${dish.idMeal}
+              name=${dish.name}
+              category=${dish.category}
+              instructions=${dish.instructions}
+              urlImage=${dish.urlImage}
+              .mainIngredients=${dish.mainIngredients}
             ></meal-element>
-        `
-      )}`
-    })}`
+          `
+        )}`,
+    })}`;
   }
 }
 

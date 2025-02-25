@@ -77,14 +77,14 @@ let MealPage = class MealPage extends LitElement {
         </div>
         <hr class="dotted">
         <img class="image" src="${this.imageUrl}" alt="Image du plat">
-        <span class="ingredients">Ingrédients :</span>
+        <span class="ingredients">Ingredients :</span>
         <ul class="ingredients">
           ${this.ingredients.length > 0
             ? this.ingredients.map(item => html `<li>${item}</li>`)
-            : html `<li>Aucun ingrédient disponible</li>`}
+            : html `<li>No ingredient available</li>`}
         </ul>
         <hr class="dotted">
-        <span class="preparation">Préparation :</span>
+        <span class="preparation">Preparation :</span>
         <div class="preparation">${this.instructions}</div>
       </div>
     `;
