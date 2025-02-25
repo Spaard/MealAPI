@@ -46,10 +46,7 @@ export class MealListElement extends LitElement {
           name: meal.strMeal,
           category: meal.strCategory,
           instructions: meal.strInstructions,
-          urlImage:
-            meal.strMeal === 'Migas'
-              ? 'https://tse3.mm.bing.net/th?id=OIP.QNc-r97rLf2qAfX9jT2g4wHaE0&pid=Api'
-              : meal.strMealThumb,
+          urlImage: meal.strMealThumb,
           mainIngredients: [
             meal.strIngredient1,
             meal.strIngredient2,
