@@ -23,11 +23,11 @@ let MealElement = class MealElement extends LitElement {
     }
     render() {
         return html `
-      <div class="container"> 
+      <div class="container" @click="${this.handleClick}" style="cursor:pointer;"> 
         <img class="image-preview" src=${this.urlImage}>
         <div class="infos-preview">
           <span class="dish-name">${this.name}</span>
-          <span class="cook-time">Temps de cook : 40min</span>
+          <span class="cook-time">Category : ${this.category}</span>
           <span class="main-ingredients">Main ingredients :</span>
           <ul style="margin : 0">
             <li>${this.mainIngredients[0]}</li>
@@ -37,6 +37,9 @@ let MealElement = class MealElement extends LitElement {
         </div>
       </div>
     `;
+    }
+    handleClick() {
+        window.location.href = `recipe.html?mealId=${this.idMeal}`;
     }
 };
 MealElement.styles = css `

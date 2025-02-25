@@ -13,7 +13,14 @@ import { LitElement } from 'lit';
  */
 export declare class MealPage extends LitElement {
     static styles: import("lit").CSSResult;
-    count: number;
+    mealId: string;
+    name: string;
+    category: string;
+    imageUrl: string;
+    ingredients: string[];
+    instructions: string;
+    area: string;
+    firstUpdated(): Promise<void>;
     render(): import("lit-html").TemplateResult<1>;
 }
 declare global {

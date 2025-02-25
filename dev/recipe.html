@@ -1,0 +1,35 @@
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>LetMeCook!</title>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="../node_modules/lit/polyfill-support.js"></script>
+    <script type="module" src="../src_built/meal-element.js"></script>
+    <script type="module" src="../src_built/meal-page.js"></script>
+    <script type="module" src="../src_built/cook-header.js"></script>
+    <script type="module" src="../src_built/meal-list.js"></script>
+    <style>
+      body {
+        margin : 0;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+      cook-header {
+        flex : 0 0;
+      }
+
+      meal-page {
+        flex : 1 1;
+        overflow-y: auto;
+      }
+
+    </style>
+  </head>
+  <body>
+    <cook-header></cook-header>
+    <meal-page>
+  </body>
+</html>
