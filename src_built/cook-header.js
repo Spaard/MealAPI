@@ -21,7 +21,7 @@ let HeaderElement = class HeaderElement extends LitElement {
             </div>
             <div>
                 <button @click=${this._onClick} part="button"></button>
-                <input type="text" placeholder="Search a dish :">
+                <input type="text" placeholder="  Search a dish :">
             </div>
         </div>
     `;
@@ -44,6 +44,7 @@ HeaderElement.styles = css `
     .container {
         border : thick double black;
         border-radius : 0px 0px 30px 0px;
+        background-color : white;
     }
     img {
         width: 5vw;
@@ -60,12 +61,15 @@ HeaderElement.styles = css `
         width: 3vw;
         aspect-ratio : 1 / 1;
         padding : 1vh;
+        border-radius : 3px;
     }
     input {
         width: 30vw;
         height: 5vh;
         font-size: 2vw;
         margin : 1vw;
+        border-radius : 10px;
+        background-color : #cae8ff;
     }
     input::placeholder {
         color : red;

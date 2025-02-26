@@ -45,13 +45,19 @@ let MealElement = class MealElement extends LitElement {
 MealElement.styles = css `
     :host {
       display: block;
-      border: solid 1px lightgray;
+      border: solid 3px black;
+      border-radius : 20px;
       padding: 16px;
       max-width: 70vw;
       margin-left: 10vw;
       margin-top: 16px;
-      background-color : white;
-    } 
+      background-color : #7ab9ea;
+      transition: transform 0.3s ease;
+    }
+
+    :host(:hover) {
+      transform: scale(1.1);
+    }
     
     h1 {
       color:blue;
