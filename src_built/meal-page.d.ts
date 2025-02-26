@@ -18,6 +18,7 @@ export declare class MealPage extends LitElement {
     category: string;
     imageUrl: string;
     ingredients: string[];
+    quantities: string[];
     instructions: string;
     area: string;
     firstUpdated(): Promise<void>;

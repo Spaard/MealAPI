@@ -85,6 +85,9 @@ export class MealPage extends LitElement {
   @property({type: Array})
   ingredients: string[] = [];
 
+  @property({type: Array})
+  quantities: string[] = [];
+
   @property({type: String})
   instructions = '';
 
@@ -119,6 +122,14 @@ export class MealPage extends LitElement {
             }
           }
 
+          this.quantities = [];
+          for (let i = 1; i <= 20; i++) {
+            const quantity = data[`strMeasure${i}`];
+            if (quantity && quantity.trim() !== '') {
+              this.quantities.push(quantity);
+            }
+          }
+
           
         } else {
           console.error('Erreur lors de la récupération du plat:', response.status);
@@ -146,7 +157,7 @@ export class MealPage extends LitElement {
         <span class="ingredients">Ingredients :</span>
         <ul class="ingredients">
           ${this.ingredients.length > 0 
-            ? this.ingredients.map(item => html`<li>${item}</li>`)
+            ? this.ingredients.map((item, index) => html`<li>${item} (${this.quantities[index]})</li>`)
             : html`<li>No ingredient available</li>`
           }
         </ul>
