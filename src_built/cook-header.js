@@ -14,7 +14,7 @@ import { customElement } from 'lit/decorators.js';
 let HeaderElement = class HeaderElement extends LitElement {
     render() {
         return html `
-        <div style="border : thick double black">
+        <div class="container">
             <div @click="${this.handleClick}" style="cursor:pointer;">
                 <img src="../images/logo.png">
                 <h1><span style="color:red">Let</span><span style="color:green">Me</span><span style="color:red">Cook</span>!</h1>
@@ -40,6 +40,10 @@ HeaderElement.styles = css `
         justify-content : space-between;
         align-items : center;
         margin : 0;
+    }
+    .container {
+        border : thick double black;
+        border-radius : 0px 0px 30px 0px;
     }
     img {
         width: 5vw;
