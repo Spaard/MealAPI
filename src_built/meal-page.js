@@ -26,6 +26,7 @@ let MealPage = class MealPage extends LitElement {
         this.category = 'category';
         this.imageUrl = '../images/test.jpg';
         this.ingredients = [];
+        this.quantities = [];
         this.instructions = '';
         this.area = '';
     }
@@ -51,6 +52,13 @@ let MealPage = class MealPage extends LitElement {
                         const ingredient = data[`strIngredient${i}`];
                         if (ingredient && ingredient.trim() !== '') {
                             this.ingredients.push(ingredient);
+                        }
+                    }
+                    this.quantities = [];
+                    for (let i = 1; i <= 20; i++) {
+                        const quantity = data[`strMeasure${i}`];
+                        if (quantity && quantity.trim() !== '') {
+                            this.quantities.push(quantity);
                         }
                     }
                 }
@@ -80,7 +88,7 @@ let MealPage = class MealPage extends LitElement {
         <span class="ingredients">Ingredients :</span>
         <ul class="ingredients">
           ${this.ingredients.length > 0
-            ? this.ingredients.map(item => html `<li>${item}</li>`)
+            ? this.ingredients.map((item, index) => html `<li>${item} (${this.quantities[index]})</li>`)
             : html `<li>No ingredient available</li>`}
         </ul>
         <hr class="dotted">
@@ -158,6 +166,9 @@ __decorate([
 __decorate([
     property({ type: Array })
 ], MealPage.prototype, "ingredients", void 0);
+__decorate([
+    property({ type: Array })
+], MealPage.prototype, "quantities", void 0);
 __decorate([
     property({ type: String })
 ], MealPage.prototype, "instructions", void 0);
