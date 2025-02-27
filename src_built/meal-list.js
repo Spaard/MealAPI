@@ -10,62 +10,86 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { LitElement, html, css } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import { Task } from '@lit/task';
 import './meal-element';
 let MealListElement = class MealListElement extends LitElement {
     constructor() {
         super(...arguments);
+        this.mealSearch = '';
+    }
+    async firstUpdated() {
+        const params = new URLSearchParams(window.location.search);
+        this.mealSearch = params.get('mealSearch') || '';
+        console.log(this.mealSearch);
         this._dishDataMining = new Task(this, {
-            args: () => ['test'],
-            task: async () => {
-                const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+            args: () => [this.mealSearch],
+            task: async ([searchTerm]) => {
+                console.log(`Fetching meals for: ${searchTerm}`);
+                const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchTerm}`);
                 if (!response.ok) {
                     throw new Error('Server response error');
                 }
                 const data = await response.json();
-                return data.meals.map((meal) => ({
+                return data.meals ? data.meals.map((meal) => ({
                     idMeal: meal.idMeal,
                     name: meal.strMeal,
                     category: meal.strCategory,
                     instructions: meal.strInstructions,
                     urlImage: meal.strMealThumb,
-                    mainIngredients: [meal.strIngredient1, meal.strIngredient2, meal.strIngredient3]
-                }));
+                    mainIngredients: [meal.strIngredient1, meal.strIngredient2, meal.strIngredient3],
+                })) : [];
             },
         });
+        this.requestUpdate();
     }
-    /**override render() {
-      return html`
-        <div class="container">
-          <img class="image-preview" src="../images/test.jpg">
-          <div class="infos-preview">
-            <span class="dish-name">Nom du plat</span>
-            <span class="cook-time">Temps de cook</span>
-            <span class="main-ingredients">Ingrédients principaux</span>
-          </div>
-        </div>
-      `;
-    }*/
-    /**mainIngredients = ${dish.mainIngredients}*/
+    ;
     render() {
-        return html `${this._dishDataMining.render({
-            initial: () => html `<p>Waiting to start task</p>`,
-            pending: () => html `<p>Running task...</p>`,
-            complete: (dishes) => html `${dishes.map((dish) => html `
-            <meal-element
-              idMeal=${dish.idMeal}
-              name=${dish.name}
-              category=${dish.category}
-              instructions=${dish.instructions}
-              urlImage=${dish.urlImage}
-              .mainIngredients=${dish.mainIngredients}
-            ></meal-element>
-          `)}`,
-        })}`;
+        return html `
+      ${this._dishDataMining
+            ? this._dishDataMining.render({
+                initial: () => html `<p>Waiting to start task...</p>`,
+                pending: () => html `<p>Loading meals...</p>`,
+                complete: (dishes) => dishes.length > 0
+                    ? html `${dishes.map((dish) => html `
+                      <meal-element
+                        idMeal=${dish.idMeal}
+                        name=${dish.name}
+                        category=${dish.category}
+                        instructions=${dish.instructions}
+                        urlImage=${dish.urlImage}
+                        .mainIngredients=${dish.mainIngredients}
+                      ></meal-element>
+                    `)}`
+                    : html `
+                <div class="no-meal">
+                  <p style="color: #300d11; font-weight: bold;">Aucun plat trouvé.</p>
+                </div>
+                
+                `,
+            })
+            : html `<p>Loading...</p>`}
+    `;
     }
 };
-MealListElement.styles = css ``;
+MealListElement.styles = css `
+  
+  .no-meal {
+    display: block;
+      border: solid 3px black;
+      border-radius : 20px;
+      padding: 16px;
+      max-width: 70vw;
+      margin-left: 10vw;
+      margin-top: 16px;
+      background-color : #d3e8f8dc;
+      transition: transform 0.3s ease;
+  }
+  
+  `;
+__decorate([
+    property({ type: String })
+], MealListElement.prototype, "mealSearch", void 0);
 MealListElement = __decorate([
     customElement('meal-list')
 ], MealListElement);

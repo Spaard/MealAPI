@@ -6,22 +6,19 @@
 import { LitElement } from 'lit';
 import { Task } from '@lit/task';
 import './meal-element';
+type Dish = {
+    idMeal: string;
+    name: string;
+    category: string;
+    instructions: string;
+    urlImage: string;
+    mainIngredients: string[];
+};
 export declare class MealListElement extends LitElement {
     static styles: import("lit").CSSResult;
-    _dishDataMining: Task<readonly ["test"], any>;
-    /**override render() {
-      return html`
-        <div class="container">
-          <img class="image-preview" src="../images/test.jpg">
-          <div class="infos-preview">
-            <span class="dish-name">Nom du plat</span>
-            <span class="cook-time">Temps de cook</span>
-            <span class="main-ingredients">Ingrédients principaux</span>
-          </div>
-        </div>
-      `;
-    }*/
-    /**mainIngredients = ${dish.mainIngredients}*/
+    mealSearch: string;
+    _dishDataMining: Task<[string], Dish[]>;
+    firstUpdated(): Promise<void>;
     render(): import("lit-html").TemplateResult<1>;
 }
 declare global {
@@ -29,4 +26,5 @@ declare global {
         'meal-list': MealListElement;
     }
 }
+export {};
 //# sourceMappingURL=meal-list.d.ts.map
