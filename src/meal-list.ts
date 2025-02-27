@@ -32,30 +32,14 @@ export class MealListElement extends LitElement {
         throw new Error('Server response error');
       }
       const data = await response.json();
-      /**return data.meals.map((meal : any) : Dish => ({
+      return data.meals.map((meal : any) : Dish => ({
         idMeal: meal.idMeal,
         name: meal.strMeal,
         category: meal.strCategory,
         instructions: meal.strInstructions,
         urlImage: meal.strMealThumb,
         mainIngredients : [meal.strIngredient1, meal.strIngredient2, meal.strIngredient3]
-      }));*/
-      const data2 = data.meals.map(
-        (meal: any): Dish => ({
-          idMeal: meal.idMeal,
-          name: meal.strMeal,
-          category: meal.strCategory,
-          instructions: meal.strInstructions,
-          urlImage: meal.strMealThumb,
-          mainIngredients: [
-            meal.strIngredient1,
-            meal.strIngredient2,
-            meal.strIngredient3,
-          ],
-        })
-      );
-      console.log(data2);
-      return data2;
+      }));
     },
   });
 

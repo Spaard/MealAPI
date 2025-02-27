@@ -20,11 +20,14 @@ export class MealPage extends LitElement {
     
     :host {
       display: block;
-      border: solid 1px blue;
+      border: solid 3px black;
+      border-radius : 20px 0px 0px 20px;
       padding: 16px;
       max-width: 70vw;
       margin-left: 10vw;
       margin-top: 16px;
+      margin-bottom : 1vh;
+      background-color : #7ab9ea;
     } 
     
     .container{
@@ -53,7 +56,9 @@ export class MealPage extends LitElement {
       max-width: 100%;
       display: block;
       object-fit: cover;
-      margin: 0;
+      margin-bottom : 2vh;
+      border: solid 2px white;
+      border-radius : 5px;
     }
 
     .dish-name {
@@ -66,7 +71,7 @@ export class MealPage extends LitElement {
     }
 
     .ingredients{
-      color: "#272727";
+      margin-block-start: 0;
     }
   `;
 
@@ -143,7 +148,7 @@ export class MealPage extends LitElement {
         </div>
         <hr class="dotted">
         <img class="image" src="${this.imageUrl}" alt="Image du plat">
-        <span class="ingredients">Ingredients :</span>
+        <span>Ingredients :</span>
         <ul class="ingredients">
           ${this.ingredients.length > 0 
             ? this.ingredients.map(item => html`<li>${item}</li>`)

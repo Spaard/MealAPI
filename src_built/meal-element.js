@@ -67,6 +67,8 @@ MealElement.styles = css `
       height: 15vw;
       aspect-ratio : 1 / 1;
       box-sizing: border-box;
+      border: solid 2px white;
+      border-radius : 5px;
     }
 
     .infos-preview{
