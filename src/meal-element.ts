@@ -31,12 +31,19 @@ export class MealElement extends LitElement {
   static override styles = css`
     :host {
       display: block;
-      border: solid 1px lightgray;
+      border: solid 3px black;
+      border-radius : 20px;
       padding: 16px;
       max-width: 70vw;
       margin-left: 10vw;
       margin-top: 16px;
-    } 
+      background-color : #d3e8f8dc;
+      transition: transform 0.3s ease;
+    }
+
+    :host(:hover) {
+      transform: scale(1.1);
+    }
     
     h1 {
       color:blue;
@@ -46,6 +53,8 @@ export class MealElement extends LitElement {
       height: 15vw;
       aspect-ratio : 1 / 1;
       box-sizing: border-box;
+      border: solid 2px white;
+      border-radius : 5px;
     }
 
     .infos-preview{

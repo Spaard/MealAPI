@@ -18,21 +18,36 @@ import {customElement, property} from 'lit/decorators.js';
 export class MealPage extends LitElement {
   static override styles = css`
     
+    
+    /*
     :host {
       display: block;
-      border: solid 1px blue;
+      border: solid 3px black;
+      //border-radius : 20px 20px 20px 20px;
       padding: 16px;
       max-width: 70vw;
       margin-left: 10vw;
       margin-top: 16px;
+      margin-bottom : 1vh;
     } 
+    */
     
-    .container{
+    
+    div.container{
+      border: solid 3px black;
+      padding: 16px;
+      max-width: 70vw;
+      margin-left: 10vw;
+      margin-top: 16px;
+      margin-bottom : 1vh;
       box-sizing: border-box;
+      border-radius : 20px 20px 20px 20px;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       gap: 1vh;
+      background-color : #d3e8f8c1;
+
     }
 
     .infos-container {
@@ -43,7 +58,7 @@ export class MealPage extends LitElement {
     }
 
     hr.dotted {
-      border-top: 3px dotted #bbb;
+      border-top: 3px dotted #3f424e;
       width: 100%; 
     }
 
@@ -53,7 +68,9 @@ export class MealPage extends LitElement {
       max-width: 100%;
       display: block;
       object-fit: cover;
-      margin: 0;
+      margin-bottom : 2vh;
+      border: solid 2px white;
+      border-radius : 5px;
     }
 
     .dish-name {
@@ -66,7 +83,7 @@ export class MealPage extends LitElement {
     }
 
     .ingredients{
-      color: "#272727";
+      margin-block-start: 0;
     }
   `;
 
@@ -154,7 +171,7 @@ export class MealPage extends LitElement {
         </div>
         <hr class="dotted">
         <img class="image" src="${this.imageUrl}" alt="Image du plat">
-        <span class="ingredients">Ingredients :</span>
+        <span>Ingredients :</span>
         <ul class="ingredients">
           ${this.ingredients.length > 0 
             ? this.ingredients.map((item, index) => html`<li>${item} (${this.quantities[index]})</li>`)
