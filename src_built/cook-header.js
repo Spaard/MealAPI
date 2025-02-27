@@ -14,14 +14,14 @@ import { customElement } from 'lit/decorators.js';
 let HeaderElement = class HeaderElement extends LitElement {
     render() {
         return html `
-        <div style="border : thick double black">
+        <div class="container">
             <div @click="${this.handleClick}" style="cursor:pointer;">
                 <img src="../images/logo.png">
                 <h1><span style="color:red">Let</span><span style="color:green">Me</span><span style="color:red">Cook</span>!</h1>
             </div>
             <div>
                 <button @click=${this._onClick} part="button"></button>
-                <input type="text" placeholder="Search a dish :">
+                <input type="text" placeholder="  Search a dish :">
             </div>
         </div>
     `;
@@ -41,6 +41,12 @@ HeaderElement.styles = css `
         align-items : center;
         margin : 0;
     }
+    .container {
+        border : thick double black;
+        //border-radius : 0px 0px 30px 0px;
+        background-color : white;
+        
+    }
     img {
         width: 5vw;
         aspect-ratio : 1 / 1;
@@ -56,12 +62,15 @@ HeaderElement.styles = css `
         width: 3vw;
         aspect-ratio : 1 / 1;
         padding : 1vh;
+        border-radius : 3px;
     }
     input {
         width: 30vw;
         height: 5vh;
         font-size: 2vw;
         margin : 1vw;
+        border-radius : 10px;
+        background-color : #cae8ff;
     }
     input::placeholder {
         color : red;
