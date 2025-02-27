@@ -21,13 +21,27 @@ let HeaderElement = class HeaderElement extends LitElement {
             </div>
             <div>
                 <button @click=${this._onClick} part="button"></button>
-                <input type="text" placeholder="  Search a dish :">
+                <input id="meal-search" type="text" placeholder="Search a dish :" @keydown="${this._onEnterPress}">
             </div>
         </div>
     `;
     }
     _onClick() {
-        console.log("Clicked");
+        const inputElement = this.shadowRoot?.querySelector("#meal-search");
+        if (inputElement) {
+            const searchQuery = encodeURIComponent(inputElement.value.trim());
+            if (searchQuery) {
+                window.location.href = `index.html?mealSearch=${searchQuery}`;
+            }
+            else {
+                window.location.href = `index.html?mealSearch=${''}`;
+            }
+        }
+    }
+    _onEnterPress(event) {
+        if (event.key === "Enter") {
+            this._onClick();
+        }
     }
     handleClick() {
         window.location.href = `index.html`;
@@ -71,6 +85,7 @@ HeaderElement.styles = css `
         margin : 1vw;
         border-radius : 10px;
         background-color : #cae8ff;
+        padding-left: 15px;
     }
     input::placeholder {
         color : red;

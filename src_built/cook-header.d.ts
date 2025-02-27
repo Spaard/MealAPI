@@ -8,6 +8,7 @@ export declare class HeaderElement extends LitElement {
     static styles: import("lit").CSSResult;
     render(): import("lit-html").TemplateResult<1>;
     private _onClick;
+    private _onEnterPress;
     handleClick(): void;
 }
 declare global {
