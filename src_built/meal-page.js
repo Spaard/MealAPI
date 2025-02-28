@@ -34,7 +34,7 @@ let MealPage = class MealPage extends LitElement {
         // Récupération de l'id du plat à partir de l'URL
         const params = new URLSearchParams(window.location.search);
         this.mealId = params.get('mealId') || '';
-        console.log(this.mealId);
+        console.log('id:' + this.mealId);
         if (this.mealId) {
             try {
                 const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${this.mealId}`);

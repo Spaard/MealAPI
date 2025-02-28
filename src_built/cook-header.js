@@ -34,12 +34,15 @@ let HeaderElement = class HeaderElement extends LitElement {
     _onClick() {
         const inputElement = this.shadowRoot?.querySelector("#meal-search");
         if (inputElement) {
-            const searchQuery = encodeURIComponent(inputElement.value.trim());
+            let searchQuery = encodeURIComponent(inputElement.value.trim());
+            console.log(searchQuery);
             if (searchQuery) {
+                searchQuery = 'https://www.themealdb.com/api/json/v1/1/search.php?s=' + searchQuery;
+                console.log(searchQuery);
                 window.location.href = `index.html?mealSearch=${searchQuery}`;
             }
             else {
-                window.location.href = `index.html?mealSearch=${''}`;
+                window.location.href = `index.html?mealSearch=${'https://www.themealdb.com/api/json/v1/1/search.php?s='}`;
             }
         }
     }
@@ -49,7 +52,7 @@ let HeaderElement = class HeaderElement extends LitElement {
         }
     }
     handleClick() {
-        window.location.href = `index.html`;
+        window.location.href = `index.html?mealSearch=${'https://www.themealdb.com/api/json/v1/1/search.php?s='}`;
     }
 };
 HeaderElement.styles = css `

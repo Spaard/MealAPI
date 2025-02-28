@@ -11,15 +11,50 @@ let smallDrop = class smallDrop extends LitElement {
         super(...arguments);
         this.isOpen = false;
         this.filterName = 'Filter';
+        this.filterLetter = '';
+        this.filterOptions = [];
+        this.key = '';
+    }
+    async firstUpdated() {
+        if (this.filterName === 'Category') {
+            this.filterLetter = 'c';
+            this.key = 'strCategory';
+        }
+        else if (this.filterName === 'Main Ingredient') {
+            this.filterLetter = 'i';
+            this.key = 'strIngredient';
+        }
+        else if (this.filterName === 'Area') {
+            this.filterLetter = 'a';
+            this.key = 'strArea';
+        }
+        try {
+            const response = await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?${this.filterLetter}=list`);
+            if (response.ok) {
+                let data = await response.json();
+                data = data.meals;
+                this.filterOptions = [];
+                for (let i = 0; i < data.length; i++) {
+                    const option = data[i][this.key];
+                    this.filterOptions.push(option);
+                }
+            }
+            else {
+                console.error('Erreur lors de la récupération du plat:', response.status);
+            }
+        }
+        catch (error) {
+            console.error('Erreur réseau :', error);
+        }
     }
     render() {
         return html `
       <div class="dropdown">
         <div @click="${this.toggleDropdown}" class="dropbtn">${this.filterName}</div>
         <div class="dropdown-content ${this.isOpen ? 'show' : ''}">
-          <a href="#">Link 1</a>
-          <a href="#">Link 2</a>
-          <a href="#">Link 3</a>
+        ${this.filterOptions.length > 0
+            ? this.filterOptions.map((item) => html `<a href=#>${item}</a>`)
+            : html `<a href=#>No ingredient available</a>`}
         </div>
       </div>
     `;
@@ -85,6 +120,15 @@ __decorate([
 __decorate([
     property({ type: String })
 ], smallDrop.prototype, "filterName", void 0);
+__decorate([
+    property({ type: String })
+], smallDrop.prototype, "filterLetter", void 0);
+__decorate([
+    property({ type: Array })
+], smallDrop.prototype, "filterOptions", void 0);
+__decorate([
+    property({ type: String })
+], smallDrop.prototype, "key", void 0);
 smallDrop = __decorate([
     customElement('small-drop')
 ], smallDrop);
