@@ -4,17 +4,20 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 import { LitElement } from 'lit';
-import './dropdown-filter';
-export declare class HeaderElement extends LitElement {
+export declare class MealElement extends LitElement {
+    idMeal: string;
+    name: string;
+    category: string;
+    instructions: string;
+    urlImage: string;
+    mainIngredients: string[];
     static styles: import("lit").CSSResult;
     render(): import("lit-html").TemplateResult<1>;
-    private _onClick;
-    private _onEnterPress;
     handleClick(): void;
 }
 declare global {
     interface HTMLElementTagNameMap {
-        'cook-header': HeaderElement;
+        'meal-element': MealElement;
     }
 }
-//# sourceMappingURL=cook-header.d.ts.map
+//# sourceMappingURL=meal-element%20copy.d.ts.map
