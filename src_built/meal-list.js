@@ -16,21 +16,21 @@ import './meal-element';
 let MealListElement = class MealListElement extends LitElement {
     constructor() {
         super(...arguments);
-        this.mealSearch = '';
+        this.mealSearch = "";
     }
     async firstUpdated() {
         const params = new URLSearchParams(window.location.search);
-        this.mealSearch = params.get('mealSearch') || '';
-        console.log(this.mealSearch);
+        this.mealSearch = params.get('mealSearch') || "https://www.themealdb.com/api/json/v1/1/search.php?s=";
         this._dishDataMining = new Task(this, {
             args: () => [this.mealSearch],
             task: async ([searchTerm]) => {
                 console.log(`Fetching meals for: ${searchTerm}`);
-                const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchTerm}`);
+                const response = await fetch(searchTerm);
                 if (!response.ok) {
                     throw new Error('Server response error');
                 }
                 const data = await response.json();
+                console.log(data);
                 return data.meals ? data.meals.map((meal) => ({
                     idMeal: meal.idMeal,
                     name: meal.strMeal,

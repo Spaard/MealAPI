@@ -6,6 +6,7 @@
 
 import {LitElement, html, css} from 'lit';
 import {customElement} from 'lit/decorators.js';
+import './dropdown-filter';
 
 @customElement('cook-header')
 export class HeaderElement extends LitElement {
@@ -58,10 +59,14 @@ export class HeaderElement extends LitElement {
   override render() {
     return html`
         <div class="container">
+          <div>
+            <dropdown-filter></dropdown-filter>
             <div @click="${this.handleClick}" style="cursor:pointer;">
                 <img src="../images/logo.png">
                 <h1><span style="color:red">Let</span><span style="color:green">Me</span><span style="color:red">Cook</span>!</h1>
             </div>
+          </div>
+          
             <div>
                 <button @click=${this._onClick} part="button"></button>
                 <input id="meal-search" type="text" placeholder="Search a dish :" @keydown="${this._onEnterPress}">
@@ -73,11 +78,14 @@ export class HeaderElement extends LitElement {
   private _onClick() {
     const inputElement = this.shadowRoot?.querySelector("#meal-search") as HTMLInputElement;
     if (inputElement) {
-        const searchQuery = encodeURIComponent(inputElement.value.trim());
+        let searchQuery = encodeURIComponent(inputElement.value.trim());
+        console.log(searchQuery)
         if (searchQuery) {
-            window.location.href = `index.html?mealSearch=${searchQuery}`;
+          searchQuery = 'https://www.themealdb.com/api/json/v1/1/search.php?s='+ searchQuery;
+          console.log(searchQuery)
+          window.location.href = `index.html?mealSearch=${searchQuery}`;
         } else {
-          window.location.href = `index.html?mealSearch=${''}`;
+          window.location.href = `index.html?mealSearch=${'https://www.themealdb.com/api/json/v1/1/search.php?s='}`;
         }
     }
 }
@@ -89,7 +97,7 @@ private _onEnterPress(event: KeyboardEvent) {
 }
 
   handleClick() {
-    window.location.href = `index.html`;
+    window.location.href = `index.html?mealSearch=${'https://www.themealdb.com/api/json/v1/1/search.php?s='}`;
   }
 
 }
