@@ -21,7 +21,6 @@ let MealListElement = class MealListElement extends LitElement {
     async firstUpdated() {
         const params = new URLSearchParams(window.location.search);
         this.mealSearch = params.get('mealSearch') || "https://www.themealdb.com/api/json/v1/1/search.php?s=";
-        console.log(typeof this.mealSearch);
         this._dishDataMining = new Task(this, {
             args: () => [this.mealSearch],
             task: async ([searchTerm]) => {
@@ -31,6 +30,7 @@ let MealListElement = class MealListElement extends LitElement {
                     throw new Error('Server response error');
                 }
                 const data = await response.json();
+                console.log(data);
                 return data.meals ? data.meals.map((meal) => ({
                     idMeal: meal.idMeal,
                     name: meal.strMeal,

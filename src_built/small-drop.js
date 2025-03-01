@@ -53,8 +53,12 @@ let smallDrop = class smallDrop extends LitElement {
         <div @click="${this.toggleDropdown}" class="dropbtn">${this.filterName}</div>
         <div class="dropdown-content ${this.isOpen ? 'show' : ''}">
         ${this.filterOptions.length > 0
-            ? this.filterOptions.map((item) => html `<a href=#>${item}</a>`)
-            : html `<a href=#>No ingredient available</a>`}
+            ? this.filterOptions.map((item) => html `
+              <a href="index.html?mealSearch=${encodeURIComponent(`https://www.themealdb.com/api/json/v1/1/filter.php?${this.filterLetter}=${item}`)}">
+                ${item}
+              </a>
+            `)
+            : html `<a href="index.html?mealSearch=${'https://www.themealdb.com/api/json/v1/1/search.php?s='}">No ingredient available</a>`}
         </div>
       </div>
     `;

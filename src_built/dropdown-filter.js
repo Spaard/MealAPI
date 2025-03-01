@@ -22,7 +22,7 @@ let DropdownFilter = class DropdownFilter extends LitElement {
       <div class="sidebar ${this.isOpen ? 'open' : ''}">
         <span class="close-btn" @click="${this.toggleMenu}">&times;</span>
         <div class="sidebar-content">
-          <a href="#">Home</a>
+          <a href="index.html?mealSearch=${'https://www.themealdb.com/api/json/v1/1/search.php?s='}">Home</a>
 
           <small-drop filterName="Category"></small-drop>
           <small-drop filterName="Main Ingredient"></small-drop>
