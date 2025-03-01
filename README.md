@@ -1,3 +1,13 @@
+Aller voir dev/README.md pour avoir toutes les informations relatives à notre projet
+
+
+
+
+
+
+
+
+
 # LitElement TypeScript starter
 
 This project includes a sample component using LitElement with TypeScript.
